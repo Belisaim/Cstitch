@@ -8,6 +8,24 @@ http://cstitch.sourceforge.net/
 See **INSTALL_linux.md** for linux compile instructions.
 
 ### Release Notes ###
+
+21 августа 2021 г.
+Изменена строка 388 в файле windowManager.cpp
+Указан формат даты, записываемой в файл проекта.
+Этот формат, в отличие от предыдущего, не содержит букв, только цифры.
+Сам формат, по-видимому, ни на что не влияет.
+Однако, в  локалях, отличных от английской, эти буквы записывались широкими символами, длина строки при загрузке файла проекта вычислялась неправильно, выдавалась ошибка:
+Bad project file
+Sorry, myproject.xst appears to be corrupted (diagnostic: empty image)
+Теперь работает хорошо.
+В линуксе можно не исправлять эту ошибку, но тогда программу следует запускать, указав английскую локаль, например, так:
+$ LC_TIME=C ./cstitch
+или
+$ LC_ALL=C.UTF-8 ./cstitch
+или
+$ LC_ALL="en_GB.UTF-8" ./cstitch
+и т.п.
+
 Beta version 0.9.8 released on March 20, 2017:
 * Added options during pattern saving for specifying the width of a color border
   around each symbol in the pdf pattern, and for specifying how often the
